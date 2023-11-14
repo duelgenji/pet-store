@@ -28,4 +28,5 @@ nohup java -jar pet-store.jar >> pet-store.log &
 kill -9 $(ps aux | grep 'pet-store.jar' | awk '{print $2}') >/dev/null 2>&1
 ```
 http://localhost:13000/swagger-ui/index.html
+
 http://localhost:13000/v3/api-docs
