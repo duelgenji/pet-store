@@ -1,5 +1,5 @@
 # Pet Store 宠物商店
-### 将官方的pet store用 SpringBoot项目复刻了一遍
+### 将官方的pet store用 SpringBoot 写了一遍（实际上用swagger codegen 直接生成就可以）
 Reference参考地址:
 
 https://petstore.swagger.io/
