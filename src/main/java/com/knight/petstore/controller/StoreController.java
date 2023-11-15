@@ -2,8 +2,8 @@ package com.knight.petstore.controller;
 
 import com.knight.petstore.data.OrderData;
 import com.knight.petstore.model.Order;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,14 +14,14 @@ import java.util.Map;
  * @author knight
  * @since 2023/11/8
  **/
-@Tag(name="store", description = "Access to Petstore orders")
+@Api(value="store", description = "Access to Petstore orders")
 @RequestMapping("store")
 @RestController
 public class StoreController {
 
     private static OrderData orderData = new OrderData();
 
-    @Operation(summary="订购宠物", description = "订购一个宠物")
+    @ApiOperation(value="订购宠物", notes = "订购一个宠物")
     @PostMapping
     public ResponseEntity<?> placeOrder(@RequestBody Order order) {
 
@@ -35,7 +35,7 @@ public class StoreController {
         return ResponseEntity.ok("order created");
     }
 
-    @Operation(summary="删除一个订单By username", description = "删除指定orderId的订单")
+    @ApiOperation(value="删除一个订单By username", notes = "删除指定orderId的订单")
     @DeleteMapping("{orderId}")
     public ResponseEntity<?> deleteOrder(@PathVariable Long orderId) {
 
@@ -56,7 +56,7 @@ public class StoreController {
     }
 
 
-    @Operation(summary="获取订单信息By orderID", description = "获取指定orderId的订单信息")
+    @ApiOperation(value="获取订单信息By orderID", notes = "获取指定orderId的订单信息")
     @GetMapping("{orderId}")
     public ResponseEntity<?> getOrderById(@PathVariable Long orderId) {
 
@@ -71,7 +71,7 @@ public class StoreController {
         return ResponseEntity.ok(order);
     }
 
-    @Operation(summary="获取各状态宠物的订单数量", description = "获取各状态宠物的订单数量")
+    @ApiOperation(value="获取各状态宠物的订单数量", notes = "获取各状态宠物的订单数量")
     @GetMapping("inventory")
     public ResponseEntity<?> getInventory() {
         Map<String, Integer> map = orderData.getCountByStatus();

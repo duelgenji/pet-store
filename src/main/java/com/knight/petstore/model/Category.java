@@ -1,16 +1,17 @@
 package com.knight.petstore.model;
 
-import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-@Schema(description = "宠物类别")
+@ApiModel(description = "宠物类别")
 public class Category {
 
-  @Schema(name = "id", description = "分类id")
+  @ApiModelProperty(name = "id", notes = "分类id")
   private long id;
 
-  @Schema(description = "分类名")
+  @ApiModelProperty(notes = "分类名")
   private String name;
 
 }

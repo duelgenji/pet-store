@@ -2,9 +2,8 @@ package com.knight.petstore.controller;
 
 import com.knight.petstore.data.UserData;
 import com.knight.petstore.model.User;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.tags.Tag;
-import org.apache.commons.lang3.RandomUtils;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,21 +15,21 @@ import java.util.List;
  * @author knight
  * @since 2023/11/8
  **/
-@Tag(name="user", description = "Operations about user")
+@Api(value="user", description = "Operations about user")
 @RequestMapping("user")
 @RestController
-public class UserController {
+public class UserController{
 
-    private static UserData userData = new UserData();
+    private static final UserData userData = new UserData();
 
-    @Operation(summary="新增用户", description = "新增一个用户")
+    @ApiOperation(value="新增用户", notes = "新增一个用户")
     @PostMapping
     public ResponseEntity<?> createUser(@RequestBody User user) {
         userData.addUser(user);
         return ResponseEntity.ok("user added");
     }
 
-    @Operation(summary="批量新增用户", description = "通过数组批量新增用户")
+    @ApiOperation(value="批量新增用户", notes = "通过数组批量新增用户")
     @PostMapping("createWithList")
     public ResponseEntity<?> createUsersWithListInput(@RequestBody List<User> userList) {
 
@@ -44,7 +43,7 @@ public class UserController {
     }
 
 
-    @Operation(summary="删除一个用户By username", description = "删除指定username的用户")
+    @ApiOperation(value="删除一个用户By username", notes = "删除指定username的用户")
     @DeleteMapping("{username}")
     public ResponseEntity<?> deleteUser(@PathVariable String username) {
         if (username == null) {
@@ -65,7 +64,7 @@ public class UserController {
     }
 
 
-    @Operation(summary="修改用户信息", description = "修改已存在的的用户")
+    @ApiOperation(value="修改用户信息", notes = "修改已存在的的用户")
     @PutMapping("{username}")
     public ResponseEntity<?> updateUser(@PathVariable String username,
                                         @RequestBody User user) {
@@ -87,7 +86,7 @@ public class UserController {
     }
 
 
-    @Operation(summary="获取用户信息By username", description = "获取指定username的用户信息")
+    @ApiOperation(value="获取用户信息By username", notes = "获取指定username的用户信息")
     @GetMapping("{username}")
     public ResponseEntity<?> getUserByName(@PathVariable String username) {
 
@@ -104,7 +103,7 @@ public class UserController {
 
     }
 
-    @Operation(summary="用户登录", description = "用户登录")
+    @ApiOperation(value="用户登录", notes = "用户登录")
     @GetMapping("login")
     public ResponseEntity<?> loginUser(@RequestParam String username,
                                        @RequestParam String password) {
@@ -112,11 +111,11 @@ public class UserController {
 
         return ResponseEntity.ok()
                 .header("X-Rate-Limit", String.valueOf(5000))
-                .header("X-Expires-After", date.toString()).body("Logged in user session: " + RandomUtils.nextLong());
+                .header("X-Expires-After", date.toString()).body("Logged in user session: " + 10000L);
 
     }
 
-    @Operation(summary="用户登出", description = "用户登出")
+    @ApiOperation(value="用户登出", notes = "用户登出")
     @GetMapping("logout")
     public ResponseEntity<?> logoutUser() {
         return ResponseEntity.ok().body("logout");
