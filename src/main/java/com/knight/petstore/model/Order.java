@@ -13,7 +13,7 @@ public class Order {
   private long petId;
   private int quantity;
   private Date shipDate;
-  @ApiModelProperty(name = "订单状态", allowableValues = "placed, approved, delivered")
+  @ApiModelProperty(notes = "订单状态", allowableValues = "placed, approved, delivered")
   private String status;
   private boolean complete;
 }

@@ -2,8 +2,12 @@ package com.knight.petstore.controller;
 
 import com.knight.petstore.data.OrderData;
 import com.knight.petstore.model.Order;
+import com.knight.petstore.model.Pet;
+import com.knight.petstore.model.Result;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -77,4 +81,17 @@ public class StoreController {
         Map<String, Integer> map = orderData.getCountByStatus();
         return ResponseEntity.ok(map);
     }
+
+
+
+    @ApiOperation(value="获取订单信息By orderID 用Result<>", notes = "获取指定orderId的订单信息")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "successful operation", response = Order.class)
+    })
+    @GetMapping("{orderId}/result")
+    public Result<Order> getOrderByIdResult(@PathVariable Long orderId) {
+        Order order = orderData.getOrderById(orderId);
+        return Result.success(order);
+    }
+
 }
